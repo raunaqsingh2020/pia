@@ -30,7 +30,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div id="smooth-wrapper">
+    <div id="smooth-wrapper" className="min-h-screen">
       <main id="smooth-content" className="min-h-[calc(100vh-75px)] flex flex-col justify-between px-6 py-12">
         {/* Hero Section with Large Name */}
         <div className="flex-1 flex items-center justify-center">
@@ -50,8 +50,9 @@ export default function Home() {
             A financial reporter and multi-format creator crafting stories that matter.
           </p>
         </div>
-        <Footer />
       </main>
+
+      <Footer />
     </div>
   );
 }
