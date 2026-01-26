@@ -10,6 +10,7 @@ type OrgSection = {
     name: string;
     logoSrc: string;
     logoAlt: string;
+    logoUrl: string;
     groups?: Array<{ title: string; stories: Story[] }>;
     stories?: Story[];
 };
@@ -40,8 +41,9 @@ function StoriesGrid({ stories }: { stories: Story[] }) {
 const SECTIONS: OrgSection[] = [
     {
         name: "CNBC.com",
-        logoSrc: "/logos/cnbc.svg",
+        logoSrc: "/logos/cnbc2.svg",
         logoAlt: "CNBC",
+        logoUrl: "https://www.cnbc.com/pia-singh/",
         groups: [
             {
                 title: "Deep Dives",
@@ -127,8 +129,9 @@ const SECTIONS: OrgSection[] = [
     },
     {
         name: "The Wall Street Journal",
-        logoSrc: "/logos/wsj.svg",
+        logoSrc: "/logos/wsj2.svg",
         logoAlt: "The Wall Street Journal",
+        logoUrl: "https://www.wsj.com/news/author/pia-singh",
         groups: [
             {
                 title: "Articles",
@@ -186,40 +189,46 @@ const SECTIONS: OrgSection[] = [
     },
     {
         name: "The Daily Pennsylvanian",
-        logoSrc: "/logos/dp.svg",
+        logoSrc: "/logos/dp2.svg",
         logoAlt: "The Daily Pennsylvanian",
-        stories: [
+        logoUrl: "https://www.thedp.com/staff/pia-singh",
+        groups: [
             {
-                title:
-                    "Leaked reports allege that Penn officials led ‘shameless cover-up’ to protect Gene Therapy Program",
-                href: "https://www.thedp.com/article/2022/04/upenn-gene-therapy-program-jim-wilson-corrupt-investigation-toxic-workplace",
+                title: "Articles",
+                stories: [
+                    {
+                        title:
+                            "Leaked reports allege that Penn officials led ‘shameless cover-up’ to protect Gene Therapy Program",
+                        href: "https://www.thedp.com/article/2022/04/upenn-gene-therapy-program-jim-wilson-corrupt-investigation-toxic-workplace",
+                    },
+                    {
+                        title:
+                            "Penn employees allege ‘dysfunctional, toxic workplace’ in Gene Therapy Program",
+                        href: "https://www.thedp.com/article/2021/11/penn-gene-therapy-program-toxic-workplace-jim-wilson-accusations-abuse",
+                    },
+                    {
+                        title:
+                            "Starbucks stores on Penn’s campus unionize, adding fuel to a nationwide labor movement",
+                        href: "https://www.thedp.com/article/2022/05/starbucks-vote-to-unionize-philadelphia-penn-med-walnut-socialist-labor-movement",
+                    },
+                    {
+                        title:
+                            "From civil rights to Black Lives Matter: Inside the fight for racial justice at Penn",
+                        href: "https://www.thedp.com/article/2020/09/civil-rights-penn-philadelphia-alumni-black-lives-matter",
+                    },
+                    {
+                        title:
+                            "‘I would like my normal lungs back’: Students recount physical and emotional toll of COVID-19",
+                        href: "https://www.thedp.com/article/2021/01/penn-students-covid-symptoms-pandemic",
+                    },
+                    {
+                        title:
+                            "Former ICE director Thomas Homan returned to speak at Penn. Protesters returned too.",
+                        href: "https://www.thedp.com/article/2020/01/ice-thomas-homan-protest-immigration-director-penn-border-wall",
+                    },
+                ],
             },
-            {
-                title:
-                    "Penn employees allege ‘dysfunctional, toxic workplace’ in Gene Therapy Program",
-                href: "https://www.thedp.com/article/2021/11/penn-gene-therapy-program-toxic-workplace-jim-wilson-accusations-abuse",
-            },
-            {
-                title:
-                    "Starbucks stores on Penn’s campus unionize, adding fuel to a nationwide labor movement",
-                href: "https://www.thedp.com/article/2022/05/starbucks-vote-to-unionize-philadelphia-penn-med-walnut-socialist-labor-movement",
-            },
-            {
-                title:
-                    "From civil rights to Black Lives Matter: Inside the fight for racial justice at Penn",
-                href: "https://www.thedp.com/article/2020/09/civil-rights-penn-philadelphia-alumni-black-lives-matter",
-            },
-            {
-                title:
-                    "‘I would like my normal lungs back’: Students recount physical and emotional toll of COVID-19",
-                href: "https://www.thedp.com/article/2021/01/penn-students-covid-symptoms-pandemic",
-            },
-            {
-                title:
-                    "Former ICE director Thomas Homan returned to speak at Penn. Protesters returned too.",
-                href: "https://www.thedp.com/article/2020/01/ice-thomas-homan-protest-immigration-director-penn-border-wall",
-            },
-        ],
+        ]
     },
 ];
 
@@ -241,19 +250,26 @@ export default function Journalism() {
                         <section key={section.name} className="rounded-3xl bg-neutral-50 p-6 sm:p-8">
                             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                                 <div className="flex items-center gap-4">
-                                    <Image
-                                        src={section.logoSrc}
-                                        alt={section.logoAlt}
-                                        width={520}
-                                        height={120}
-                                        className="h-10 w-auto text-neutral-900"
-                                    />
-                                    <div>
+                                    <Link
+                                        key={section.name}
+                                        href={section.logoUrl}
+                                        target={section.logoUrl.startsWith("http") ? "_blank" : undefined}
+                                        rel={section.logoUrl.startsWith("http") ? "noreferrer" : undefined}
+                                    >
+                                        <Image
+                                            src={section.logoSrc}
+                                            alt={section.logoAlt}
+                                            width={520}
+                                            height={80}
+                                            className="h-7 w-auto text-neutral-900"
+                                        />
+                                    </Link>
+                                    {/* <div>
                                         <h2 className="text-lg font-medium text-neutral-900">
                                             {section.name}
                                         </h2>
                                         <p className="text-xs text-neutral-500">Click a story to read.</p>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 
