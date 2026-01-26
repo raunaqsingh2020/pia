@@ -64,7 +64,7 @@ const Navigation = () => {
                     {/* Close Button */}
                     <button
                         onClick={() => setIsMenuOpen(false)}
-                        className="absolute top-6 right-6 text-sm font-light tracking-wide text-neutral-900 hover:text-neutral-600 transition-colors border-b border-neutral-900 hover:border-neutral-600 pb-0.5 cursor-pointer"
+                        className="absolute top-6 right-6 text-sm font-light tracking-wide text-neutral-900 hover:text-neutral-600 transition-colors border-b border-neutral-900 hover:border-neutral-600 cursor-pointer"
                     >
                         CLOSE
                     </button>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="WSJ" viewBox="0 0 520 120">
+  <rect x="0" y="0" width="520" height="120" rx="14" fill="currentColor"/>
+  <text x="28" y="58" fill="white" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="44" font-weight="700" letter-spacing="0.5">WSJ</text>
+  <text x="30" y="92" fill="white" opacity="0.85" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="22" font-weight="500" letter-spacing="0.2">The Wall Street Journal</text>
+</svg>
