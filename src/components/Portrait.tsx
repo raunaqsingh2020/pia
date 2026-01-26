@@ -1,48 +1,82 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 export default function Portrait() {
-    const [scrollY, setScrollY] = useState(0);
-    const [mounted, setMounted] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const imageRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        setMounted(true);
-        const handleScroll = () => {
-            setScrollY(window.scrollY);
-        };
+    useLayoutEffect(() => {
+        // Only run on client
+        if (typeof window === "undefined" || !containerRef.current || !imageRef.current) return;
 
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
+        const ctx = gsap.context(() => {
+            // 1. Initial State
+            // Center the image with CSS top-1/2 left-1/2, then pull back 50% with xPercent/yPercent.
+            gsap.set(imageRef.current, {
+                xPercent: -50,
+                yPercent: -50,
+                x: 50,
+                y: -50,
+                opacity: 0,
+                scale: 0.9, // Start slightly smaller for entrance effect
+            });
+
+            gsap.set(containerRef.current, {
+                opacity: 0,
+            });
+
+            // 2. Entrance Animation
+            const tl = gsap.timeline({ delay: 0.5 });
+
+            tl.to(containerRef.current, {
+                opacity: 1,
+                duration: 0.5,
+            })
+                .to(imageRef.current, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.5,
+                    ease: "power3.out",
+                }, "<"); // Run start of this animation with start of previous
+
+            // 3. Scroll Parallax Effect
+            // Move from -50% (centered) to -30% (moved down slightly) as we scroll
+            // allowing it to move smoothly.
+            gsap.to(imageRef.current, {
+                yPercent: -30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "body",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: true,
+                },
+            });
+        }, containerRef);
+
+        return () => ctx.revert();
     }, []);
-
-    // Calculate parallax offset
-    // Moving slower than scroll for parallax effect (usually factor < 1)
-    // Or user wants it to "smoothly move as page is expanded or scrolled"
-    // Let's make it move upwards slightly as we scroll down to give it a "lifting" feel or standard parallax.
-    const translateY = scrollY * 0.2;
 
     return (
         <div
-            className={`absolute top-0 right-0 z-0 pointer-events-none transition-opacity duration-1000 ease-out"
-                }`}
-            style={{
-                // Combine the entry transition (handled by class) with the scroll parallax
-                transform: `translate3d(0, ${translateY}px, 0)`,
-                // We override the class transform for the parallax, but the opacity transition still handles the entry fade
-            }}
+            ref={containerRef}
+            className="absolute top-0 right-0 h-full w-full pointer-events-none overflow-hidden mix-blend-multiply opacity-80"
+            style={{ isolation: "isolate" }} // Helps with z-index contexts
         >
             <div
-                className="relative w-[30vw] min-w-[150px] max-w-[300px] aspect-[3/4] mr-[30vw] mt-[5vh]"
+                ref={imageRef}
+                className="absolute top-1/2 left-1/2 w-[180px] md:w-[230px] lg:w-[250px] xl:w-[270px] aspect-[3/4]"
             >
                 <Image
                     src="/portrait.png"
-                    alt="Portrait of Singh"
+                    alt="Portrait of Pia Singh"
                     fill
-                    className="object-cover object-center"
+                    className="object-cover object-center transition-all duration-700"
+                    sizes="(max-width: 768px) 40vw, 30vw"
                     priority
-                    sizes="(max-width: 768px) 100vw, 33vw"
                 />
             </div>
         </div>
