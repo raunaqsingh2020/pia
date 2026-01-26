@@ -1,5 +1,17 @@
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+import Footer from "@/components/Footer";
+
+// Register GSAP plugins
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+}
 
 type Story = {
     title: string;
@@ -233,61 +245,81 @@ const SECTIONS: OrgSection[] = [
 ];
 
 export default function Journalism() {
-    return (
-        <main className="min-h-screen pt-24 px-6">
-            <div className="mx-auto max-w-7xl">
-                <div className="flex flex-col gap-3">
-                    <h1 className="text-4xl font-light tracking-wide text-neutral-900">
-                        Journalism
-                    </h1>
-                    <p className="max-w-2xl text-sm leading-6 text-neutral-600">
-                        Selected work across business, markets, and campus reporting.
-                    </p>
-                </div>
+    useEffect(() => {
+        // Create ScrollSmoother instance once
+        const smootherInstance = ScrollSmoother.create({
+            wrapper: "#smooth-wrapper",
+            content: "#smooth-content",
+            smooth: 1, // Smoothing factor for scroll
+            effects: true, // Enable lag/scroll-based effects
+            normalizeScroll: true, // Prevents mobile address bar resizing, disables overscroll bounce
+        });
 
-                <div className="mt-12 space-y-14">
-                    {SECTIONS.map((section) => (
-                        <section key={section.name} className="rounded-3xl bg-neutral-50 p-6 sm:p-8">
-                            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                                <div className="flex items-center gap-4">
-                                    <Link
-                                        key={section.name}
-                                        href={section.logoUrl}
-                                        target={section.logoUrl.startsWith("http") ? "_blank" : undefined}
-                                        rel={section.logoUrl.startsWith("http") ? "noreferrer" : undefined}
-                                    >
-                                        <Image
-                                            src={section.logoSrc}
-                                            alt={section.logoAlt}
-                                            width={520}
-                                            height={80}
-                                            className="h-7 w-auto text-neutral-900"
-                                        />
-                                    </Link>
-                                    {/* <div>
+        return () => {
+            if (smootherInstance) {
+                smootherInstance.kill();
+            }
+        };
+    }, []);
+
+    return (
+        <div id="smooth-wrapper">
+            <main id="smooth-content" className="min-h-screen pt-24 px-6">
+                <div className="mx-auto max-w-7xl">
+                    <div className="flex flex-col gap-3">
+                        <h1 className="text-4xl font-light tracking-wide text-neutral-900">
+                            Journalism
+                        </h1>
+                        <p className="max-w-2xl text-sm leading-6 text-neutral-600">
+                            Selected work across business, markets, and campus reporting.
+                        </p>
+                    </div>
+
+                    <div className="mt-12 space-y-14">
+                        {SECTIONS.map((section) => (
+                            <section key={section.name} className="rounded-3xl bg-neutral-50 p-6 sm:p-8">
+                                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                                    <div className="flex items-center gap-4">
+                                        <Link
+                                            key={section.name}
+                                            href={section.logoUrl}
+                                            target={section.logoUrl.startsWith("http") ? "_blank" : undefined}
+                                            rel={section.logoUrl.startsWith("http") ? "noreferrer" : undefined}
+                                        >
+                                            <Image
+                                                src={section.logoSrc}
+                                                alt={section.logoAlt}
+                                                width={520}
+                                                height={80}
+                                                className="h-7 w-auto text-neutral-900"
+                                            />
+                                        </Link>
+                                        {/* <div>
                                         <h2 className="text-lg font-medium text-neutral-900">
                                             {section.name}
                                         </h2>
                                         <p className="text-xs text-neutral-500">Click a story to read.</p>
                                     </div> */}
-                                </div>
-                            </div>
-
-                            <div className="mt-6 space-y-10">
-                                {section.groups?.map((g) => (
-                                    <div key={g.title}>
-                                        <h3 className="mb-4 text-xs font-semibold tracking-widest text-neutral-700">
-                                            {g.title.toUpperCase()}
-                                        </h3>
-                                        <StoriesGrid stories={g.stories} />
                                     </div>
-                                ))}
-                                {section.stories ? <StoriesGrid stories={section.stories} /> : null}
-                            </div>
-                        </section>
-                    ))}
+                                </div>
+
+                                <div className="mt-6 space-y-10">
+                                    {section.groups?.map((g) => (
+                                        <div key={g.title}>
+                                            <h3 className="mb-4 text-xs font-semibold tracking-widest text-neutral-700">
+                                                {g.title.toUpperCase()}
+                                            </h3>
+                                            <StoriesGrid stories={g.stories} />
+                                        </div>
+                                    ))}
+                                    {section.stories ? <StoriesGrid stories={section.stories} /> : null}
+                                </div>
+                            </section>
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </main>
+                <Footer />
+            </main>
+        </div>
     );
 }
