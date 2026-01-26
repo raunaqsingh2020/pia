@@ -52,7 +52,7 @@ export default function ElasticGrid({ items, smoother }: ElasticGridProps) {
         if (!smoother || columns.length === 0) return;
 
         const applyLagEffects = () => {
-            const mid = (numColumns - 1) / 2; // Center index
+            const mid = numColumns == 3 ? 1 : 1; // Center index
 
             columnRefs.current.forEach((column, i) => {
                 if (!column) return;
@@ -98,8 +98,8 @@ export default function ElasticGrid({ items, smoother }: ElasticGridProps) {
                         // so global index = itemIndex * numColumns + colIndex
                         const globalIndex = itemIndex * numColumns + colIndex;
                         return (
-                            <div key={`${colIndex}-${itemIndex}`} className="mb-8 break-inside-avoid w-full md:mb-4 lg:mb-16">
-                                <div className="flex flex-col gap-3">
+                            <div key={`${colIndex}-${itemIndex}`} className="break-inside-avoid w-full mb-3 sm:mb-4 lg:mb-6">
+                                <div className="flex flex-col gap-1 sm:gap-3">
                                     <Image
                                         src={item.imageUrl!}
                                         alt={item.title}
@@ -107,7 +107,7 @@ export default function ElasticGrid({ items, smoother }: ElasticGridProps) {
                                         height={800}
                                         className="w-full h-auto object-cover block"
                                     />
-                                    <div className="text-[0.65rem] font-light text-[#171717] leading-6 tracking-[0.01em] uppercase md:text-[0.9375rem] lg:text-base">{`${String(globalIndex + 1).padStart(2, '0')}. ${item.title}`}</div>
+                                    <div className="font-light text-neutral-900 uppercase text-[0.625rem] sm:text-xs">{`${String(globalIndex + 1).padStart(2, '0')}. ${item.title}`}</div>
                                 </div>
                             </div>
                         );
