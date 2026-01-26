@@ -32,7 +32,7 @@ const Navigation = () => {
                         <li key={link.href}>
                             <Link
                                 href={link.href}
-                                className={`text-sm font-light tracking-wide transition-colors border-b pb-0.5 ${pathname === link.href
+                                className={`text-sm font-light uppercase tracking-wide transition-colors border-b pb-0.5 ${pathname === link.href
                                     ? "text-neutral-900 border-neutral-900"
                                     : "text-neutral-600 border-transparent hover:text-neutral-900 hover:border-neutral-900"
                                     }`}

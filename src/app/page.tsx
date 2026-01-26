@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col justify-between px-6 py-12">
+    <main className="min-h-[calc(100vh-50px)] flex flex-col justify-between px-6 py-12">
       {/* Hero Section with Large Name */}
       <div className="flex-1 flex items-center justify-center">
         <div className="w-full max-w-5xl">
@@ -19,6 +19,6 @@ export default function Home() {
           A financial reporter and multi-format creator crafting stories that matter.
         </p>
       </div>
-    </main>
+    </main >
   );
 }
