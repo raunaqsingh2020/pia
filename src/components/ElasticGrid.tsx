@@ -14,30 +14,45 @@ type ElasticGridProps = {
     smoother?: ScrollSmoother | null;
 };
 
-const NUM_COLUMNS = 3;
 const BASE_LAG = 0.5; // Lag applied to the center column
 const LAG_SCALE = 0.1; // How much additional lag is applied per column away from center
 
+const getNumColumns = () => {
+    if (typeof window === 'undefined') return 3;
+    return window.innerWidth <= 768 ? 2 : 3;
+};
+
 export default function ElasticGrid({ items, smoother }: ElasticGridProps) {
     const [columns, setColumns] = useState<ArtPiece[][]>([]);
+    const [numColumns, setNumColumns] = useState(() => getNumColumns());
     const gridRef = useRef<HTMLDivElement>(null);
     const columnRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+    // Handle window resize to update number of columns
+    useEffect(() => {
+        const handleResize = () => {
+            setNumColumns(getNumColumns());
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     // Distribute items into columns
     useEffect(() => {
-        const cols: ArtPiece[][] = Array.from({ length: NUM_COLUMNS }, () => []);
+        const cols: ArtPiece[][] = Array.from({ length: numColumns }, () => []);
         items.forEach((item, index) => {
-            cols[index % NUM_COLUMNS].push(item);
+            cols[index % numColumns].push(item);
         });
         setColumns(cols);
-    }, [items]);
+    }, [items, numColumns]);
 
     // Apply lag effects to each column
     useEffect(() => {
         if (!smoother || columns.length === 0) return;
 
         const applyLagEffects = () => {
-            const mid = (NUM_COLUMNS - 1) / 2; // Center index
+            const mid = (numColumns - 1) / 2; // Center index
 
             columnRefs.current.forEach((column, i) => {
                 if (!column) return;
@@ -66,7 +81,7 @@ export default function ElasticGrid({ items, smoother }: ElasticGridProps) {
             clearTimeout(timeoutId);
             window.removeEventListener("resize", handleResize);
         };
-    }, [columns, smoother]);
+    }, [columns, smoother, numColumns]);
 
     return (
         <div ref={gridRef} className="grid-container">
@@ -80,19 +95,19 @@ export default function ElasticGrid({ items, smoother }: ElasticGridProps) {
                 >
                     {columnItems.map((item, itemIndex) => {
                         // Calculate global index: items are distributed round-robin,
-                        // so global index = itemIndex * NUM_COLUMNS + colIndex
-                        const globalIndex = itemIndex * NUM_COLUMNS + colIndex;
+                        // so global index = itemIndex * numColumns + colIndex
+                        const globalIndex = itemIndex * numColumns + colIndex;
                         return (
-                            <div key={`${colIndex}-${itemIndex}`} className="grid-item">
-                                <div className="art-item">
+                            <div key={`${colIndex}-${itemIndex}`} className="mb-8 break-inside-avoid w-full md:mb-4 lg:mb-16">
+                                <div className="flex flex-col gap-3">
                                     <Image
                                         src={item.imageUrl!}
                                         alt={item.title}
                                         width={600}
                                         height={800}
-                                        className="art-image"
+                                        className="w-full h-auto object-cover block"
                                     />
-                                    <div className="art-title">{`${String(globalIndex + 1).padStart(2, '0')}. ${item.title}`}</div>
+                                    <div className="text-[0.65rem] font-light text-[#171717] leading-6 tracking-[0.01em] uppercase md:text-[0.9375rem] lg:text-base">{`${String(globalIndex + 1).padStart(2, '0')}. ${item.title}`}</div>
                                 </div>
                             </div>
                         );
