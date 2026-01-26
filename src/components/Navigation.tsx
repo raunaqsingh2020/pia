@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const Navigation = () => {
     const pathname = usePathname();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const links = [
         { name: "Journalism", href: "/journalism" },
@@ -14,30 +16,67 @@ const Navigation = () => {
     ];
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-neutral-200">
-            <div className="max-w-7xl mx-auto px-6 py-4">
-                <div className="flex items-center justify-between">
-                    <Link href="/" className="text-xl font-light tracking-wide text-neutral-900 hover:text-neutral-600 transition-colors">
-                        Pia Singh
-                    </Link>
-                    <ul className="flex gap-8">
+        <>
+            {/* Menu Button - Visible on Mobile and Tablet */}
+            <button
+                onClick={() => setIsMenuOpen(true)}
+                className="fixed top-6 right-6 z-50 text-sm font-light tracking-wide text-neutral-900 hover:text-neutral-600 transition-colors border-b border-neutral-900 hover:border-neutral-600 pb-0.5 cursor-pointer md:hidden"
+            >
+                MENU
+            </button>
+
+            {/* Desktop Navigation Links - Visible at Medium Breakpoint and Above */}
+            <nav className="hidden md:block fixed top-6 right-6 z-50">
+                <ul className="flex gap-8">
+                    {links.map((link) => (
+                        <li key={link.href}>
+                            <Link
+                                href={link.href}
+                                className={`text-sm font-light tracking-wide transition-colors border-b pb-0.5 ${pathname === link.href
+                                    ? "text-neutral-900 border-neutral-900"
+                                    : "text-neutral-600 border-transparent hover:text-neutral-900 hover:border-neutral-900"
+                                    }`}
+                            >
+                                {link.name}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+
+            {/* Full-Screen Overlay Menu */}
+            <div
+                className={`fixed inset-0 z-[100] bg-white transition-opacity duration-300 ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                    }`}
+            >
+                <div className="h-full flex flex-col justify-center items-center px-6">
+                    {/* Close Button */}
+                    <button
+                        onClick={() => setIsMenuOpen(false)}
+                        className="absolute top-6 right-6 text-sm font-light tracking-wide text-neutral-900 hover:text-neutral-600 transition-colors border-b border-neutral-900 hover:border-neutral-600 pb-0.5 cursor-pointer"
+                    >
+                        CLOSE
+                    </button>
+
+                    {/* Navigation Links */}
+                    <nav className="space-y-8">
                         {links.map((link) => (
-                            <li key={link.href}>
-                                <Link
-                                    href={link.href}
-                                    className={`text-sm font-light tracking-wide transition-colors ${pathname === link.href
-                                            ? "text-neutral-900"
-                                            : "text-neutral-500 hover:text-neutral-900"
-                                        }`}
-                                >
-                                    {link.name}
-                                </Link>
-                            </li>
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                onClick={() => setIsMenuOpen(false)}
+                                className={`block text-6xl font-light tracking-tight transition-colors ${pathname === link.href
+                                    ? "text-neutral-900"
+                                    : "text-neutral-400 hover:text-neutral-900"
+                                    }`}
+                            >
+                                {link.name}
+                            </Link>
                         ))}
-                    </ul>
+                    </nav>
                 </div>
             </div>
-        </nav>
+        </>
     );
 };
 
