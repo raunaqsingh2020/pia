@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
@@ -12,6 +12,11 @@ if (typeof window !== "undefined") {
 }
 
 export default function About() {
+    const titleRef = useRef<HTMLDivElement>(null);
+    const introRef = useRef<HTMLDivElement>(null);
+    const journalismRef = useRef<HTMLDivElement>(null);
+    const artRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
         // Create ScrollSmoother instance once
         const smootherInstance = ScrollSmoother.create({
@@ -22,10 +27,42 @@ export default function About() {
             normalizeScroll: true, // Prevents mobile address bar resizing, disables overscroll bounce
         });
 
+        // Create fade animations
+        const elements = [
+            { ref: titleRef, delay: 0 },
+            { ref: introRef, delay: 0.1 },
+            { ref: journalismRef, delay: 0.2 },
+            { ref: artRef, delay: 0.3 },
+        ];
+
+        const animations = elements.map(({ ref, delay }) => {
+            if (ref.current) {
+                return gsap.fromTo(
+                    ref.current,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: ref.current,
+                            start: "top 80%",
+                            toggleActions: "play none none none",
+                        },
+                    }
+                );
+            }
+            return null;
+        });
+
         return () => {
+            animations.forEach((anim) => anim?.kill());
             if (smootherInstance) {
                 smootherInstance.kill();
             }
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
     }, []);
 
@@ -33,14 +70,14 @@ export default function About() {
         <div id="smooth-wrapper">
             <main id="smooth-content" className="min-h-screen pt-24 px-6">
                 <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col gap-3 mb-12">
+                    <div ref={titleRef} className="flex flex-col gap-3 mb-12">
                         <h1 className="text-4xl font-light tracking-wide text-neutral-900">
                             Hello!
                         </h1>
                     </div>
 
                     <div className="space-y-8 text-neutral-900">
-                        <div>
+                        <div ref={introRef}>
                             <p className="text-lg leading-8 mb-4">
                                 My name is Pia. I&apos;m a Markets Reporter at CNBC.com based in New York City, where I report on global financial markets and cover investing trends tied to the future of our world. I specialize in researching and writing about innovative technologies. I&apos;m also an experienced fine artist and storyteller.
                             </p>
@@ -49,7 +86,7 @@ export default function About() {
                             </p>
                         </div>
 
-                        <div className="pt-6">
+                        <div ref={journalismRef} className="pt-6">
                             <h2 className="text-xl font-medium text-neutral-900 mb-4 tracking-wide">
                                 JOURNALISM & DIGITAL STRATEGY
                             </h2>
@@ -69,7 +106,7 @@ export default function About() {
                             </div>
                         </div>
 
-                        <div className="pt-6">
+                        <div ref={artRef} className="pt-6">
                             <h2 className="text-xl font-medium text-neutral-900 mb-4 tracking-wide">
                                 ART & FILM
                             </h2>

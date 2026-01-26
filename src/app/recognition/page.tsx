@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
@@ -12,6 +12,11 @@ if (typeof window !== "undefined") {
 }
 
 export default function Recognition() {
+    const titleRef = useRef<HTMLDivElement>(null);
+    const awardsRef = useRef<HTMLElement>(null);
+    const publishedRef = useRef<HTMLElement>(null);
+    const displaysRef = useRef<HTMLElement>(null);
+
     useEffect(() => {
         // Create ScrollSmoother instance once
         const smootherInstance = ScrollSmoother.create({
@@ -22,10 +27,42 @@ export default function Recognition() {
             normalizeScroll: true, // Prevents mobile address bar resizing, disables overscroll bounce
         });
 
+        // Create fade animations
+        const elements = [
+            { ref: titleRef, delay: 0 },
+            { ref: awardsRef, delay: 0.1 },
+            { ref: publishedRef, delay: 0.2 },
+            { ref: displaysRef, delay: 0.3 },
+        ];
+
+        const animations = elements.map(({ ref, delay }) => {
+            if (ref.current) {
+                return gsap.fromTo(
+                    ref.current,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: ref.current,
+                            start: "top 80%",
+                            toggleActions: "play none none none",
+                        },
+                    }
+                );
+            }
+            return null;
+        });
+
         return () => {
+            animations.forEach((anim) => anim?.kill());
             if (smootherInstance) {
                 smootherInstance.kill();
             }
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
     }, []);
 
@@ -33,14 +70,14 @@ export default function Recognition() {
         <div id="smooth-wrapper">
             <main id="smooth-content" className="min-h-screen pt-24 px-6">
                 <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col gap-3 mb-12">
+                    <div ref={titleRef} className="flex flex-col gap-3 mb-12">
                         <h1 className="text-4xl font-light tracking-wide text-neutral-900">
                             Recognition
                         </h1>
                     </div>
 
                     {/* Awards Section */}
-                    <section className="mb-16">
+                    <section ref={awardsRef} className="mb-16">
                         <h2 className="text-2xl font-light tracking-wide text-neutral-900 mb-8">
                             Awards
                         </h2>
@@ -238,7 +275,7 @@ export default function Recognition() {
                     </section>
 
                     {/* Published In Section */}
-                    <section className="mb-16">
+                    <section ref={publishedRef} className="mb-16">
                         <h2 className="text-2xl font-light tracking-wide text-neutral-900 mb-8">
                             Published In
                         </h2>
@@ -257,7 +294,7 @@ export default function Recognition() {
                     </section>
 
                     {/* Displays Section */}
-                    <section>
+                    <section ref={displaysRef}>
                         <h2 className="text-2xl font-light tracking-wide text-neutral-900 mb-8">
                             Displays
                         </h2>

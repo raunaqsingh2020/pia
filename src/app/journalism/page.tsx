@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { gsap } from "gsap";
@@ -245,6 +245,9 @@ const SECTIONS: OrgSection[] = [
 ];
 
 export default function Journalism() {
+    const headerRef = useRef<HTMLDivElement>(null);
+    const sectionsRef = useRef<(HTMLElement | null)[]>([]);
+
     useEffect(() => {
         // Create ScrollSmoother instance once
         const smootherInstance = ScrollSmoother.create({
@@ -255,10 +258,54 @@ export default function Journalism() {
             normalizeScroll: true, // Prevents mobile address bar resizing, disables overscroll bounce
         });
 
+        // Create fade animation for header
+        const headerAnimation = headerRef.current
+            ? gsap.fromTo(
+                headerRef.current,
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: headerRef.current,
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                    },
+                }
+            )
+            : null;
+
+        // Create fade animations for each section
+        const sectionAnimations = sectionsRef.current
+            .filter((ref) => ref !== null)
+            .map((ref, index) => {
+                return gsap.fromTo(
+                    ref,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay: index * 0.1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: ref,
+                            start: "top 80%",
+                            toggleActions: "play none none none",
+                        },
+                    }
+                );
+            });
+
         return () => {
+            headerAnimation?.kill();
+            sectionAnimations.forEach((anim) => anim.kill());
             if (smootherInstance) {
                 smootherInstance.kill();
             }
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
     }, []);
 
@@ -266,7 +313,7 @@ export default function Journalism() {
         <div id="smooth-wrapper">
             <main id="smooth-content" className="min-h-screen pt-24 px-6">
                 <div className="mx-auto max-w-7xl">
-                    <div className="flex flex-col gap-3">
+                    <div ref={headerRef} className="flex flex-col gap-3">
                         <h1 className="text-4xl font-light tracking-wide text-neutral-900">
                             Journalism
                         </h1>
@@ -276,8 +323,14 @@ export default function Journalism() {
                     </div>
 
                     <div className="mt-12 space-y-14">
-                        {SECTIONS.map((section) => (
-                            <section key={section.name} className="rounded-3xl bg-neutral-50 p-6 sm:p-8">
+                        {SECTIONS.map((section, index) => (
+                            <section
+                                key={section.name}
+                                ref={(el) => {
+                                    if (el) sectionsRef.current[index] = el;
+                                }}
+                                className="rounded-3xl bg-neutral-50 p-6 sm:p-8"
+                            >
                                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                                     <div className="flex items-center gap-4">
                                         <Link
