@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ElasticGrid from "@/components/ElasticGrid";
 import Footer from "@/components/Footer";
 import { gsap } from "gsap";
@@ -47,6 +47,8 @@ const ART_PIECES = [
 
 export default function FineArt() {
     const [smoother, setSmoother] = useState<ScrollSmoother | null>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
+    const gridRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         // Create ScrollSmoother instance once
@@ -63,10 +65,52 @@ export default function FineArt() {
             setSmoother(smootherInstance);
         });
 
+        // Create fade animation for header
+        const headerAnimation = headerRef.current
+            ? gsap.fromTo(
+                headerRef.current,
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: headerRef.current,
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                    },
+                }
+            )
+            : null;
+
+        // Create fade animation for grid
+        const gridAnimation = gridRef.current
+            ? gsap.fromTo(
+                gridRef.current,
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: 0.2,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: gridRef.current,
+                        start: "top 85%",
+                        toggleActions: "play none none none",
+                    },
+                }
+            )
+            : null;
+
         return () => {
+            headerAnimation?.kill();
+            gridAnimation?.kill();
             if (smootherInstance) {
                 smootherInstance.kill();
             }
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
     }, []);
 
@@ -74,7 +118,7 @@ export default function FineArt() {
         <div id="smooth-wrapper">
             <main id="smooth-content" className="min-h-screen pt-24">
                 <div className="px-6 mb-12">
-                    <div className="max-w-7xl mx-auto">
+                    <div ref={headerRef} className="max-w-7xl mx-auto">
                         <h1 className="text-4xl font-light tracking-wide text-neutral-900 mb-2">
                             Fine Art
                         </h1>
@@ -83,7 +127,7 @@ export default function FineArt() {
                         </p>
                     </div>
                 </div>
-                <div className="w-full">
+                <div ref={gridRef} className="w-full">
                     <ElasticGrid items={ART_PIECES} smoother={smoother} />
                 </div>
                 <Footer />
