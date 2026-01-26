@@ -7,7 +7,7 @@ export default function Home() {
           <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight text-neutral-900">
             PIA
           </h1>
-          <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight text-neutral-900 text-right -mt-4 sm:-mt-6 md:-mt-8">
+          <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight text-neutral-900 text-right md:-mt-8">
             SINGH
           </h1>
         </div>
