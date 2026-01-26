@@ -9,6 +9,7 @@ const Navigation = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const links = [
+        { name: "Home", href: "/" },
         { name: "Journalism", href: "/journalism" },
         { name: "Fine Art", href: "/fine-art" },
         { name: "Recognition", href: "/recognition" },
@@ -17,10 +18,20 @@ const Navigation = () => {
 
     return (
         <>
+            {/* Desktop Home Link - Top Left */}
+            {pathname !== "/" && (
+                <Link
+                    href="/"
+                    className="fixed top-6 left-6 z-50 text-sm font-light tracking-wide text-neutral-900 hover:text-neutral-600 transition-colors hover:border-neutral-600 pb-0.5 cursor-pointer block"
+                >
+                    HOME
+                </Link>
+            )}
+
             {/* Menu Button - Visible on Mobile and Tablet */}
             <button
                 onClick={() => setIsMenuOpen(true)}
-                className="fixed top-6 right-6 z-50 text-sm font-light tracking-wide text-neutral-900 hover:text-neutral-600 transition-colors border-b border-neutral-900 hover:border-neutral-600 pb-0.5 cursor-pointer md:hidden"
+                className="fixed top-6 right-6 z-50 text-sm font-light tracking-wide text-neutral-900 hover:text-neutral-600 transition-colors border-b border-neutral-900 hover:border-neutral-600 cursor-pointer md:hidden"
             >
                 MENU
             </button>
@@ -28,7 +39,7 @@ const Navigation = () => {
             {/* Desktop Navigation Links - Visible at Medium Breakpoint and Above */}
             <nav className="hidden md:block fixed top-6 right-6 z-50">
                 <ul className="flex gap-8">
-                    {links.map((link) => (
+                    {links.filter(link => link.href !== "/").map((link) => (
                         <li key={link.href}>
                             <Link
                                 href={link.href}
@@ -59,16 +70,13 @@ const Navigation = () => {
                     </button>
 
                     {/* Navigation Links */}
-                    <nav className="space-y-8">
+                    <nav className="flex flex-col items-center space-y-6">
                         {links.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
                                 onClick={() => setIsMenuOpen(false)}
-                                className={`block text-6xl font-light tracking-tight transition-colors ${pathname === link.href
-                                    ? "text-neutral-900"
-                                    : "text-neutral-400 hover:text-neutral-900"
-                                    }`}
+                                className={`block text-5xl md:text-7xl font-light tracking-tight transition-all border-b-2 pb-1 text-neutral-400 border-transparent hover:text-neutral-900 hover:border-neutral-900 cursor-pointer`}
                             >
                                 {link.name}
                             </Link>
