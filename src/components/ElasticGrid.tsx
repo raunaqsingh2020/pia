@@ -81,21 +81,21 @@ export default function ElasticGrid({ items, smoother }: ElasticGridProps) {
                     {columnItems.map((item, itemIndex) => (
                         <div key={`${colIndex}-${itemIndex}`} className="grid-item">
                             <div className="art-item">
-                                {item.imageUrl ? (
-                                    <Image
-                                        src={item.imageUrl}
-                                        alt={item.title}
-                                        width={600}
-                                        height={800}
-                                        className="art-image"
-                                    />
-                                ) : (
+                                {/* {item.imageUrl ? ( */}
+                                <Image
+                                    src={item.imageUrl}
+                                    alt={item.title}
+                                    width={600}
+                                    height={800}
+                                    className="art-image"
+                                />
+                                {/* ) : (
                                     <div className="art-placeholder">
                                         <div className="placeholder-content">
                                             <div className="placeholder-icon">🎨</div>
                                         </div>
                                     </div>
-                                )}
+                                )} */}
                                 <div className="art-title">{item.title}</div>
                             </div>
                         </div>
