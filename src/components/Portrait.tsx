@@ -3,26 +3,40 @@
 import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export default function Portrait() {
+export default function Portrait({ children }: { children?: React.ReactNode }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
+    const counterRef = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
         // Only run on client
         if (typeof window === "undefined" || !containerRef.current || !imageRef.current) return;
 
+        // Register ScrollTrigger if not already registered (safety check)
+        gsap.registerPlugin(ScrollTrigger);
+
         const ctx = gsap.context(() => {
             // 1. Initial State
-            // Center the image with CSS top-1/2 left-1/2, then pull back 50% with xPercent/yPercent.
+            // Image: Centered (-50%, -50%) + User Offset (50, -50)
             gsap.set(imageRef.current, {
                 xPercent: -50,
                 yPercent: -50,
                 x: 50,
                 y: -50,
                 opacity: 0,
-                scale: 0.9, // Start slightly smaller for entrance effect
+                scale: 0.9,
             });
+
+            // Counter: Needs to cancel out the User Offset (50, -50) to stay aligned with page center.
+            // So we apply (-50, 50).
+            if (counterRef.current) {
+                gsap.set(counterRef.current, {
+                    x: -50, // Cancel out image x:50
+                    y: 50,  // Cancel out image y:-50
+                });
+            }
 
             gsap.set(containerRef.current, {
                 opacity: 0,
@@ -40,21 +54,29 @@ export default function Portrait() {
                     scale: 1,
                     duration: 1.5,
                     ease: "power3.out",
-                }, "<"); // Run start of this animation with start of previous
+                }, "<");
 
             // 3. Scroll Parallax Effect
-            // Move from -50% (centered) to -30% (moved down slightly) as we scroll
-            // allowing it to move smoothly.
-            gsap.to(imageRef.current, {
-                yPercent: -30,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "body",
-                    start: "top top",
-                    end: "bottom bottom",
-                    scrub: true,
-                },
+            // We use pixel values for Y movement to make inversion easy.
+            const parallaxY = -150; // Move up by 150px over the scroll
+
+            const st = ScrollTrigger.create({
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true,
+                animation: gsap.timeline()
+                    .to(imageRef.current, {
+                        y: `+=${parallaxY}`, // Relative movement
+                        ease: "none",
+                    })
+                    // Animate the counter-content in the opposite direction
+                    .to(counterRef.current, {
+                        y: `-=${parallaxY}`,
+                        ease: "none"
+                    }, "<"),
             });
+
         }, containerRef);
 
         return () => ctx.revert();
@@ -63,21 +85,56 @@ export default function Portrait() {
     return (
         <div
             ref={containerRef}
-            className="absolute top-0 right-0 h-full w-full pointer-events-none overflow-hidden mix-blend-multiply opacity-80"
-            style={{ isolation: "isolate" }} // Helps with z-index contexts
+            className="absolute top-0 right-0 h-full w-full pointer-events-none overflow-hidden z-10"
+            style={{ isolation: "isolate" }}
         >
             <div
                 ref={imageRef}
                 className="absolute top-1/2 left-1/2 w-[180px] md:w-[230px] lg:w-[250px] xl:w-[270px] aspect-[3/4]"
             >
-                <Image
-                    src="/portrait.png"
-                    alt="Portrait of Pia Singh"
-                    fill
-                    className="object-cover object-center transition-all duration-700"
-                    sizes="(max-width: 768px) 40vw, 30vw"
-                    priority
-                />
+                {/* The Portrait Image */}
+                <div className="relative w-full h-full">
+                    <Image
+                        src="/portrait.png"
+                        alt="Portrait of Pia Singh"
+                        fill
+                        className="object-cover object-center transition-all duration-700"
+                        sizes="(max-width: 768px) 40vw, 30vw"
+                        priority
+                    />
+                </div>
+
+                {/* The Masked Overlay Content */}
+                {children && (
+                    <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+                        {/* 
+                   Counter-Ref: 
+                   Positioned absolutely 100vw/100vh centered on the parent.
+                   This creates a "viewport" that matches the screen, pinned to the center of the image.
+                   We then use GSAP translated offsets to align it perfectly with the real screen.
+                */}
+                        <div
+                            ref={counterRef}
+                            className="absolute left-1/2 top-1/2 w-[100vw] h-[100vh] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+                        >
+                            {/* 
+                        Use a wrapper that matches the page's main layout padding/structure 
+                        to ensure perfect alignment of the text.
+                    */}
+                            <div className="w-full h-full flex flex-col justify-between px-6 py-12">
+                                <div className="flex-1 flex items-center justify-center">
+                                    {children}
+                                </div>
+                                {/* Spacer for bottom bio to match flex distribution if needed, but text is mainly centered */}
+                                <div className="max-w-2xl opacity-0">
+                                    <p className="text-md font-light leading-relaxed">
+                                        A financial reporter and multi-format creator telling stories that matter.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

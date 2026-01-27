@@ -33,15 +33,25 @@ export default function Home() {
   return (
     <div id="smooth-wrapper" className="min-h-screen">
       <main id="smooth-content" className="relative min-h-[calc(100vh-75px)] flex flex-col justify-between px-6 py-12">
-        <Portrait />
-
-        {/* Hero Section with Large Name */}
-        <div className="flex-1 flex items-center justify-center bg-[#F2F3F4]">
-          <div className="w-full max-w-5xl mix-blend-difference">
+        <Portrait>
+          {/* Masked Text Overlay - Color matches background #F2F3F4 */}
+          <div className="w-full max-w-5xl text-[#F2F3F4]">
             <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight text-neutral-50">
               PIA
             </h1>
             <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight text-neutral-50 text-right md:-mt-8">
+              SINGH
+            </h1>
+          </div>
+        </Portrait>
+
+        {/* Hero Section with Large Name */}
+        <div className="flex-1 flex items-center justify-center bg-[#F2F3F4]">
+          <div className="w-full max-w-5xl">
+            <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight text-neutral-900">
+              PIA
+            </h1>
+            <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight text-neutral-900 text-right md:-mt-8">
               SINGH
             </h1>
           </div>
