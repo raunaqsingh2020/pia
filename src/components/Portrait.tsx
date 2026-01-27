@@ -20,13 +20,14 @@ export default function Portrait({ children }: { children?: React.ReactNode }) {
         const ctx = gsap.context(() => {
             // 1. Initial State
             // Image: Centered (-50%, -50%) + User Offset (50, -50)
+            // Use clip-path for "blinds" reveal effect (starts hidden from bottom? User said "reveals upwards")
+            // inset(100% 0 0 0) -> Clipped from top 100% down. Reveal goes bottom-up.
             gsap.set(imageRef.current, {
                 xPercent: -50,
                 yPercent: -50,
                 x: 50,
                 y: -50,
-                opacity: 0,
-                scale: 0.9,
+                clipPath: "inset(100% 0 0 0)",
             });
 
             // Counter: Needs to cancel out the User Offset (50, -50) to stay aligned with page center.
@@ -50,9 +51,8 @@ export default function Portrait({ children }: { children?: React.ReactNode }) {
                 duration: 0.5,
             })
                 .to(imageRef.current, {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 1.5,
+                    clipPath: "inset(0% 0 0 0)",
+                    duration: 1.1,
                     ease: "power3.out",
                 }, "<");
 
