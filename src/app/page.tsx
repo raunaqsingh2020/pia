@@ -36,10 +36,10 @@ export default function Home() {
         <Portrait>
           {/* Masked Text Overlay - Color matches background #F2F3F4 */}
           <div className="w-full max-w-5xl text-[#F2F3F4]">
-            <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight text-neutral-200">
+            <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight">
               PIA
             </h1>
-            <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight text-neutral-200 text-right md:-mt-8">
+            <h1 className="text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] leading-none font-medium tracking-tight text-right md:-mt-8">
               SINGH
             </h1>
           </div>

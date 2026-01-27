@@ -85,7 +85,7 @@ export default function Portrait({ children }: { children?: React.ReactNode }) {
     return (
         <div
             ref={containerRef}
-            className="absolute top-0 right-0 h-full w-full pointer-events-none overflow-hidden z-10"
+            className="absolute top-0 right-0 h-full w-full pointer-events-none overflow-hidden z-10 opacity-0"
             style={{ isolation: "isolate" }}
         >
             <div
