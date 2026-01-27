@@ -90,7 +90,7 @@ export default function Portrait({ children }: { children?: React.ReactNode }) {
         >
             <div
                 ref={imageRef}
-                className="absolute top-1/2 left-1/2 w-[180px] md:w-[230px] lg:w-[250px] xl:w-[270px] aspect-[3/4]"
+                className="absolute top-1/2 left-1/2 w-[150px] sm:w-[180px] md:w-[230px] lg:w-[250px] xl:w-[270px] aspect-[3/4]"
             >
                 {/* The Portrait Image */}
                 <div className="relative w-full h-full">
@@ -99,7 +99,8 @@ export default function Portrait({ children }: { children?: React.ReactNode }) {
                         alt="Portrait of Pia Singh"
                         fill
                         className="object-cover object-center transition-all duration-700"
-                        sizes="(max-width: 768px) 40vw, 30vw"
+                        sizes="600px"
+                        quality={100}
                         priority
                     />
                 </div>
