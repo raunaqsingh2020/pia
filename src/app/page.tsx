@@ -17,7 +17,7 @@ export default function Home() {
     // Only enable ScrollSmoother on desktop (768px and above)
     let smootherInstance: ScrollSmoother | null = null;
     let isCurrentlyDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
-    
+
     if (isCurrentlyDesktop) {
       smootherInstance = ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
@@ -59,8 +59,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div id="smooth-wrapper" className="min-h-screen">
-      <main id="smooth-content" className="relative min-h-[max(500px,calc(100vh-75px))] flex flex-col justify-between px-6 py-12">
+    <div id="smooth-wrapper" className="min-h-dvh">
+      <main id="smooth-content" className="relative min-h-[max(500px,calc(100dvh-75px))] flex flex-col justify-between px-6 py-12">
         <Portrait>
           {/* Masked Text Overlay - Color matches background #F2F3F4 */}
           <div className="w-full max-w-5xl text-[#F2F3F4]">
