@@ -51,11 +51,13 @@ export default function FineArt() {
     const gridRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Only enable ScrollSmoother on desktop (768px and above)
+        // Detect mobile device using user agent
+        const isMobile = typeof window !== "undefined" && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Only enable ScrollSmoother on non-mobile devices
         let smootherInstance: ScrollSmoother | null = null;
-        let isCurrentlyDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
 
-        if (isCurrentlyDesktop) {
+        if (!isMobile) {
             smootherInstance = ScrollSmoother.create({
                 wrapper: "#smooth-wrapper",
                 content: "#smooth-content",
@@ -69,30 +71,6 @@ export default function FineArt() {
         requestAnimationFrame(() => {
             setSmoother(smootherInstance);
         });
-
-        const handleResize = () => {
-            const nowDesktop = window.innerWidth >= 768;
-            if (!isCurrentlyDesktop && nowDesktop && !smootherInstance) {
-                // Window resized from mobile to desktop
-                isCurrentlyDesktop = true;
-                smootherInstance = ScrollSmoother.create({
-                    wrapper: "#smooth-wrapper",
-                    content: "#smooth-content",
-                    smooth: 1,
-                    effects: true,
-                    normalizeScroll: true,
-                });
-                setSmoother(smootherInstance);
-            } else if (isCurrentlyDesktop && !nowDesktop && smootherInstance) {
-                // Window resized from desktop to mobile
-                isCurrentlyDesktop = false;
-                smootherInstance.kill();
-                smootherInstance = null;
-                setSmoother(null);
-            }
-        };
-
-        window.addEventListener("resize", handleResize);
 
         // Create fade animation for header
         const headerAnimation = headerRef.current
@@ -134,7 +112,6 @@ export default function FineArt() {
             : null;
 
         return () => {
-            window.removeEventListener("resize", handleResize);
             headerAnimation?.kill();
             gridAnimation?.kill();
             if (smootherInstance) {
