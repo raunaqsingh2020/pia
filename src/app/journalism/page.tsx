@@ -249,14 +249,41 @@ export default function Journalism() {
     const sectionsRef = useRef<(HTMLElement | null)[]>([]);
 
     useEffect(() => {
-        // Create ScrollSmoother instance once
-        const smootherInstance = ScrollSmoother.create({
-            wrapper: "#smooth-wrapper",
-            content: "#smooth-content",
-            smooth: 1, // Smoothing factor for scroll
-            effects: true, // Enable lag/scroll-based effects
-            normalizeScroll: true, // Prevents mobile address bar resizing, disables overscroll bounce
-        });
+        // Only enable ScrollSmoother on desktop (768px and above)
+        let smootherInstance: ScrollSmoother | null = null;
+        let isCurrentlyDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
+        
+        if (isCurrentlyDesktop) {
+            smootherInstance = ScrollSmoother.create({
+                wrapper: "#smooth-wrapper",
+                content: "#smooth-content",
+                smooth: 1, // Smoothing factor for scroll
+                effects: true, // Enable lag/scroll-based effects
+                normalizeScroll: true, // Prevents mobile address bar resizing, disables overscroll bounce
+            });
+        }
+
+        const handleResize = () => {
+            const nowDesktop = window.innerWidth >= 768;
+            if (!isCurrentlyDesktop && nowDesktop && !smootherInstance) {
+                // Window resized from mobile to desktop
+                isCurrentlyDesktop = true;
+                smootherInstance = ScrollSmoother.create({
+                    wrapper: "#smooth-wrapper",
+                    content: "#smooth-content",
+                    smooth: 1,
+                    effects: true,
+                    normalizeScroll: true,
+                });
+            } else if (isCurrentlyDesktop && !nowDesktop && smootherInstance) {
+                // Window resized from desktop to mobile
+                isCurrentlyDesktop = false;
+                smootherInstance.kill();
+                smootherInstance = null;
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
 
         // Create fade animation for header
         const headerAnimation = headerRef.current
@@ -300,6 +327,7 @@ export default function Journalism() {
             });
 
         return () => {
+            window.removeEventListener("resize", handleResize);
             headerAnimation?.kill();
             sectionAnimations.forEach((anim) => anim.kill());
             if (smootherInstance) {
