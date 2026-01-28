@@ -116,7 +116,7 @@ export default function Portrait({ children }: { children?: React.ReactNode }) {
                 */}
                         <div
                             ref={counterRef}
-                            className="absolute left-1/2 top-1/2 w-[100vw] h-[100vh] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+                            className="absolute left-1/2 top-1/2 w-[100vw] h-[max(500px,calc(100vh-75px))] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
                         >
                             {/* 
                         Use a wrapper that matches the page's main layout padding/structure 

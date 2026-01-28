@@ -32,7 +32,7 @@ export default function Home() {
 
   return (
     <div id="smooth-wrapper" className="min-h-screen">
-      <main id="smooth-content" className="relative min-h-[calc(100vh-75px)] flex flex-col justify-between px-6 py-12">
+      <main id="smooth-content" className="relative min-h-[max(500px,calc(100vh-75px))] flex flex-col justify-between px-6 py-12">
         <Portrait>
           {/* Masked Text Overlay - Color matches background #F2F3F4 */}
           <div className="w-full max-w-5xl text-[#F2F3F4]">
