@@ -34,7 +34,6 @@ const ART_PIECES = [
     { title: "SHADE", imageUrl: "/art/20.webp" },
     { title: "PORTRAIT", imageUrl: "/art/21.webp" },
     { title: "RECOGNIZE", imageUrl: "/art/22.webp" },
-    { title: "PORTRAIT", imageUrl: "/art/23.webp" },
     { title: "RED-EYED", imageUrl: "/art/25.webp" },
     { title: "BRAIDS 1", imageUrl: "/art/27.webp" },
     { title: "BRAIDS 2", imageUrl: "/art/24.webp" },
@@ -53,7 +52,7 @@ export default function FineArt() {
     useEffect(() => {
         // Detect mobile device using user agent
         const isMobile = typeof window !== "undefined" && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
+
         // Only enable ScrollSmoother on non-mobile devices
         let smootherInstance: ScrollSmoother | null = null;
 
