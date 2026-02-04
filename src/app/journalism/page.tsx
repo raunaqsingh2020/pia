@@ -58,8 +58,44 @@ const SECTIONS: OrgSection[] = [
         logoUrl: "https://www.cnbc.com/pia-singh/",
         groups: [
             {
-                title: "Deep Dives",
+                title: "Articles",
                 stories: [
+                    {
+                        title:
+                            "'Greetings, earthlings': Nvidia-backed Starcloud trains first AI model in space as orbital data center race heats up",
+                        href:
+                            "https://www.cnbc.com/2025/12/10/nvidia-backed-starcloud-trains-first-ai-model-in-space-orbital-data-centers.html",
+                    },
+                    {
+                        title:
+                            "AI spending wasn't the biggest engine of U.S. economic growth in 2025, despite popular assumptions",
+                        href:
+                            "https://www.cnbc.com/2026/01/26/ai-wasnt-the-biggest-engine-of-us-gdp-growth-in-2025.html",
+                    },
+                    {
+                        title:
+                            "Software stocks face 'Innovator's Dilemma' as they plunge on AI fears",
+                        href:
+                            "https://www.cnbc.com/2026/01/20/software-stocks-face-innovators-dilemma-as-they-plunge-on-ai-fears.html",
+                    },
+                    {
+                        title:
+                            "'Sovereign AI' is poised to surge under Trump. Wall Street is sizing up a multibillion-dollar market",
+                        href:
+                            "https://www.cnbc.com/2025/06/13/sovereign-ai-set-to-boom-under-trump-wall-street-sizes-up-a-massive-market.html",
+                    },
+                    {
+                        title:
+                            "The AI 'neoclouds' buzz is growing on Wall Street, but risks are bubbling",
+                        href:
+                            "https://www.cnbc.com/2025/07/22/the-buzz-around-ai-neoclouds-is-growing-but-investors-should-tread-carefully.html",
+                    },
+                    {
+                        title:
+                            "An AI 'house of cards': Worries of a bubble grow after Oracle's rally on OpenAI deal",
+                        href:
+                            "https://www.cnbc.com/2025/09/14/an-ai-house-of-cards-worries-of-a-bubble-grow-after-oracles-rally-on-open-ai-deal.html",
+                    },
                     {
                         title:
                             "AI breakthroughs are speeding up the development of humanoid robots, but investors are still skeptical",
@@ -68,15 +104,15 @@ const SECTIONS: OrgSection[] = [
                     },
                     {
                         title:
-                            "AI is unlocking new uses for military drones, boosting demand for these companies",
+                            "Dow nosedives 1,600 points, S&P 500 and Nasdaq drop the most since 2020 after Trump's tariff onslaught",
                         href:
-                            "https://www.cnbc.com/2024/08/18/ai-is-unlocking-new-uses-for-military-drones-boosting-demand-for-these-companies.html",
+                            "https://www.cnbc.com/2025/04/02/stock-market-today-live-updates-trump-tariffs.html",
                     },
                     {
                         title:
-                            "Tending to AI’s power needs is a booming business. These stocks are in the sweet spot",
+                            "How some of the biggest U.S. companies are using AI to cut workers",
                         href:
-                            "https://www.cnbc.com/2024/01/23/these-stocks-are-poised-to-benefit-from-power-hungry-ai-.html",
+                            "https://www.cnbc.com/2025/08/13/how-some-of-the-biggest-us-companies-are-using-ai-to-cut-workers.html",
                     },
                     {
                         title:
@@ -86,54 +122,15 @@ const SECTIONS: OrgSection[] = [
                     },
                     {
                         title:
-                            "We’re in the era of heat pumps — a market that experts say is ‘set to skyrocket’",
+                            "Dealmaking rebounds after Trump's tariffs cut off a budding M&A boom",
                         href:
-                            "https://www.cnbc.com/2024/05/21/were-in-the-era-of-heat-pumps-a-market-that-experts-say-is-set-to-skyrocket.html",
+                            "https://www.cnbc.com/2025/05/22/dealmaking-activity-shows-trump-tariffs-derailed-a-budding-ma-boom.html",
                     },
-                ],
-            },
-            {
-                title: "Markets & Financial News",
-                stories: [
                     {
                         title:
-                            "Tesla could have a tough time living up to the hype around its robotaxi event",
+                            "Some soft commodity prices are surging, adding to consumer woes",
                         href:
-                            "https://www.cnbc.com/2024/09/28/tesla-could-have-a-tough-time-living-up-to-the-hype-around-its-robotaxi-event.html",
-                    },
-                    {
-                        title:
-                            "Marketwrap: Dow closes down 600 points, Nasdaq enters correction after weak jobs report: Live updates",
-                        href: "https://www.cnbc.com/2024/08/01/stock-market-today-live-updates.html",
-                    },
-                    {
-                        title:
-                            "What Wall Street can expect from key Biden-Xi meeting as U.S.-China relations remain tense",
-                        href:
-                            "https://www.cnbc.com/2023/11/14/what-wall-street-can-expect-from-key-biden-xi-meeting-as-us-china-relations-remain-tense.html",
-                    },
-                    {
-                        title:
-                            "The divide between retail’s winners and losers will be stark this back-to-school season",
-                        href:
-                            "https://www.cnbc.com/2023/09/01/divide-between-retail-winners-and-losers-is-stark-this-school-season.html",
-                    },
-                    {
-                        title:
-                            "The Fitch analyst behind the U.S. downgrade breaks down the decision—and how the country can regain the top rating",
-                        href:
-                            "https://www.cnbc.com/2023/08/02/the-fitch-analyst-behind-the-us-downgrade-breaks-down-the-decision.html",
-                    },
-                    {
-                        title:
-                            "Small caps are on a tear this year. Here’s how investors are playing the rally.",
-                        href:
-                            "https://www.cnbc.com/2023/02/16/small-caps-are-on-a-tear-this-year-heres-how-to-play-the-rally.html",
-                    },
-                    {
-                        title:
-                            "In Chinatowns across the U.S., tradition and history collide with luxury development",
-                        href: "https://www.cnbc.com/2023/05/14/chinatown-rapid-luxury-development.html",
+                            "https://www.cnbc.com/2023/09/25/some-soft-commodity-prices-are-surging-adding-to-consumer-woes.html",
                     },
                 ],
             },
@@ -251,10 +248,10 @@ export default function Journalism() {
     useEffect(() => {
         // Detect mobile device using user agent
         const isMobile = typeof window !== "undefined" && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
+
         // Only enable ScrollSmoother on non-mobile devices
         let smootherInstance: ScrollSmoother | null = null;
-        
+
         if (!isMobile) {
             smootherInstance = ScrollSmoother.create({
                 wrapper: "#smooth-wrapper",
