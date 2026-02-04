@@ -322,7 +322,7 @@ export default function Journalism() {
                             Journalism
                         </h1>
                         <p className="max-w-2xl text-sm leading-6 text-neutral-600">
-                            Selected work across business, markets, and campus reporting.
+                            Selected reporting work on global financial markets, artificial intelligence and tech investing, and local community coverage.
                         </p>
                     </div>
 
