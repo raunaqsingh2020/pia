@@ -75,7 +75,10 @@ const Navigation = () => {
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                onClick={() => setIsMenuOpen(false)}
+                                onClick={() => {
+                                    // Delay closing the menu to prevent flash of current page
+                                    setTimeout(() => setIsMenuOpen(false), 150);
+                                }}
                                 className={`block text-5xl md:text-7xl font-light tracking-tight transition-all border-b-2 pb-1 text-neutral-900 border-transparent hover:border-neutral-900 cursor-pointer`}
                             >
                                 {link.name}
