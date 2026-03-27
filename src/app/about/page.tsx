@@ -87,7 +87,7 @@ export default function About() {
                                 My name is Pia. I’m 25 years old and live in New York City.
                             </p>
                             <p className="mb-4">
-                                I currently work in the Office of the CEO at Genpact (NYSE:G), where I help lead executive communications and media strategy to inform the company’s pivot towards agentic AI and advanced technology solutions.
+                                I currently work in the Office of the CEO at Genpact (NYSE:G), where I am responsible for orchestrating executive communications and helping shape media strategy efforts as the company accelerates its pivot to an AI-first operating model.
                             </p>
                             <p className="mb-4">
                                 Previously, I was a markets and investing reporter for CNBC, where I reported on global financial markets and futuristic technology trends. I got a chance to cover the world’s biggest stories in recent time, including nascent technologies like humanoid robots and orbital data centers; the rise of ChatGPT and the ensuing AI “arms race;” the impact of agentic systems on a variety of sectors; two major global wars and one historic presidential election; high-energy Fed days and ‘Mag 7’ earnings reports; the wackiest swings in U.S. and global equities and so much more.
@@ -96,7 +96,7 @@ export default function About() {
                                 I have a Bachelor's degree in Communication from the Annenberg School for Communication of the University of Pennsylvania, with minors in Political Science and Creative Writing from the School of Arts & Sciences. During my time at Penn, I was the Executive Editor of The Daily Pennsylvanian, Inc., where I managed 250+ student managers and professional staff members of the company and oversaw the digital and print editorial coverage of the company's 3 publications: The Daily Pennsylvanian, 34th Street Magazine, and Under the Button.
                             </p>
                             <p>
-                                Previously, I've interned with The Wall Street Journal's Markets Bureau as a reporter, where I published a front-page print story. I've also worked with Philadelphia Magazine's creative services team and with several Philadelphia-based educational and service-focused nonprofits.
+                                I have also interned with The Wall Street Journal's Markets Bureau as a reporter, where I published a front-page print story. Additionally, I've worked with Philadelphia Magazine's creative services team and with several Philadelphia-based educational and service-focused nonprofits.
                             </p>
                         </div>
 
