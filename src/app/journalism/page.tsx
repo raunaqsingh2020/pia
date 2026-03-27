@@ -74,9 +74,27 @@ const SECTIONS: OrgSection[] = [
                     },
                     {
                         title:
+                            "Dealmaking rebounds after Trump's tariffs cut off a budding M&A boom",
+                        href:
+                            "https://www.cnbc.com/2025/05/22/dealmaking-activity-shows-trump-tariffs-derailed-a-budding-ma-boom.html",
+                    },
+                    {
+                        title:
                             "Software stocks face 'Innovator's Dilemma' as they plunge on AI fears",
                         href:
                             "https://www.cnbc.com/2026/01/20/software-stocks-face-innovators-dilemma-as-they-plunge-on-ai-fears.html",
+                    },
+                    {
+                        title:
+                            "Iran vows it won't surrender as war with the U.S. and Israel enters second week",
+                        href:
+                            "https://www.cnbc.com/2026/03/07/not-slowing-down-one-week-on-us-israeli-strikes-on-iran-continue.html",
+                    },
+                    {
+                        title:
+                            "Nasdaq-traded Chinese herb stock with no revenues rallies 58,000% to top Lululemon in market value",
+                        href:
+                            "https://www.cnbc.com/2025/06/17/hong-kongs-regencell-bioscience-triples-in-latest-surge-for-a-speculative-stock.html",
                     },
                     {
                         title:
@@ -119,12 +137,6 @@ const SECTIONS: OrgSection[] = [
                             "Can you hack your brain? These companies are driving innovation in the field of brain stimulation",
                         href:
                             "https://www.cnbc.com/2023/11/21/can-you-hack-your-brain-companies-drive-innovation-in-brain-stimulation.html",
-                    },
-                    {
-                        title:
-                            "Dealmaking rebounds after Trump's tariffs cut off a budding M&A boom",
-                        href:
-                            "https://www.cnbc.com/2025/05/22/dealmaking-activity-shows-trump-tariffs-derailed-a-budding-ma-boom.html",
                     },
                     {
                         title:
@@ -230,11 +242,6 @@ const SECTIONS: OrgSection[] = [
                             "‘I would like my normal lungs back’: Students recount physical and emotional toll of COVID-19",
                         href: "https://www.thedp.com/article/2021/01/penn-students-covid-symptoms-pandemic",
                     },
-                    {
-                        title:
-                            "Former ICE director Thomas Homan returned to speak at Penn. Protesters returned too.",
-                        href: "https://www.thedp.com/article/2020/01/ice-thomas-homan-protest-immigration-director-penn-border-wall",
-                    },
                 ],
             },
         ]
@@ -322,7 +329,7 @@ export default function Journalism() {
                             Journalism
                         </h1>
                         <p className="max-w-2xl text-sm leading-6 text-neutral-600">
-                            Selected reporting work on global financial markets, artificial intelligence and tech investing, and local community coverage.
+                            Selected reporting work on global financial markets news, artificial intelligence and tech investing trends, and local community coverage.
                         </p>
                     </div>
 

@@ -129,7 +129,7 @@ export default function Portrait({ children }: { children?: React.ReactNode }) {
                                 {/* Spacer for bottom bio to match flex distribution if needed, but text is mainly centered */}
                                 <div className="max-w-2xl opacity-0">
                                     <p className="text-md font-light leading-relaxed">
-                                        A financial reporter and multi-format creator telling stories that matter.
+                                        Strategist, multi-format creator and financial journalist. Telling stories that matter to audiences around the world.
                                     </p>
                                 </div>
                             </div>
