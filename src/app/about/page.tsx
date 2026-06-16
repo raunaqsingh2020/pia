@@ -86,7 +86,7 @@ export default function About() {
                             <p className="mb-4">
                                 My name is Pia, and I&apos;m based in New York City. I work at the intersection of big ideas, editorial judgement, and high stakes.
                             </p>
-                            <p className="mb-4 font-medium">
+                            <p className="mb-4">
                                 I currently work at Genpact (NYSE: G) in the Office of the CEO, where I lead external and internal executive communications, narrative strategy and multi-modal transformation storytelling as the company makes an aggressive pivot to an AI-first operating model.
                             </p>
                             <p className="mb-4">
