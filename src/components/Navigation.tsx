@@ -10,10 +10,10 @@ const Navigation = () => {
 
     const links = [
         { name: "Home", href: "/" },
+        { name: "About", href: "/about" },
         { name: "Journalism", href: "/journalism" },
         { name: "Fine Art", href: "/fine-art" },
         { name: "Recognition", href: "/recognition" },
-        { name: "About", href: "/about" },
     ];
 
     return (

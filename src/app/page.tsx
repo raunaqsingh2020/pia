@@ -67,7 +67,7 @@ export default function Home() {
         {/* Bio at Bottom */}
         <div className="max-w-2xl">
           <p className="text-md font-light text-neutral-700 leading-relaxed">
-            Strategist, multi-format creator and financial journalist. Telling stories that matter to audiences around the world.
+            Communications strategist and former financial journalist. Building brand narratives that drive business transformation.
           </p>
         </div>
       </main >
