@@ -87,7 +87,7 @@ export default function About() {
                                 My name is Pia, and I&apos;m based in New York City. I work at the intersection of narrative strategy, editorial judgment, and executive transformation.
                             </p>
                             <p className="mb-4">
-                                I currently work at Genpact (NYSE: G) in the Office of the CEO, where I lead external and internal executive communications, narrative strategy and multi-modal transformation storytelling as the company makes an aggressive pivot to an AI-first operating model.
+                                I currently work at Genpact (NYSE: G) in the Office of the CEO, leading executive communications, media strategy, and messaging frameworks as the company makes an aggressive pivot to an AI-first operating model.
                             </p>
                             <p className="mb-4">
                                 Previously, I was a markets and investing reporter at CNBC covering global financial markets, emerging technology, and the kinds of stories that move money and reshape industries. I have covered some of the world&apos;s biggest stories, including futuristic technologies like humanoid robots and orbital data centers, the rise of ChatGPT and the ensuing AI &ldquo;arms race,&rdquo; the impact of agentic systems on a variety of sectors, two major global wars and one historic presidential election, high-energy Fed days and &lsquo;Mag 7&rsquo; earnings reports, and the wackiest swings in U.S. and global equities. I&apos;ve also reported for The Wall Street Journal&apos;s Markets Bureau, where I published a front-page story and dozens of other features and articles.
