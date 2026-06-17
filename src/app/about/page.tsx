@@ -84,16 +84,16 @@ export default function About() {
                     <div className="space-y-8 text-neutral-900">
                         <div ref={introRef} className="text-lg leading-8">
                             <p className="mb-4">
-                                My name is Pia, and I&apos;m based in New York City. I work at the intersection of big ideas, editorial judgement, and high stakes.
+                                My name is Pia, and I&apos;m based in New York City. I work at the intersection of narrative strategy, editorial judgment, and executive transformation.
                             </p>
                             <p className="mb-4">
                                 I currently work at Genpact (NYSE: G) in the Office of the CEO, where I lead external and internal executive communications, narrative strategy and multi-modal transformation storytelling as the company makes an aggressive pivot to an AI-first operating model.
                             </p>
                             <p className="mb-4">
-                                Before that, I was a markets and investing reporter at CNBC covering global financial markets, emerging technology, and the kinds of stories that move money and reshape industries. I have covered some of the world&apos;s biggest stories, including futuristic technologies like humanoid robots and orbital data centers; the rise of ChatGPT and the ensuing AI &ldquo;arms race;&rdquo; the impact of agentic systems on a variety of sectors; two major global wars and one historic presidential election; high-energy Fed days and &lsquo;Mag 7&rsquo; earnings reports, and the wackiest swings in U.S. and global equities. I&apos;ve also reported for The Wall Street Journal&apos;s Markets Bureau, where I published a front-page story and dozens of other features and articles.
+                                Previously, I was a markets and investing reporter at CNBC covering global financial markets, emerging technology, and the kinds of stories that move money and reshape industries. I have covered some of the world&apos;s biggest stories, including futuristic technologies like humanoid robots and orbital data centers, the rise of ChatGPT and the ensuing AI &ldquo;arms race,&rdquo; the impact of agentic systems on a variety of sectors, two major global wars and one historic presidential election, high-energy Fed days and &lsquo;Mag 7&rsquo; earnings reports, and the wackiest swings in U.S. and global equities. I&apos;ve also reported for The Wall Street Journal&apos;s Markets Bureau, where I published a front-page story and dozens of other features and articles.
                             </p>
                             <p className="mb-4">
-                                I studied Communication at the University of Pennsylvania&apos;s Annenberg School, with minors in Political Science and Creative Writing. At Penn, I ran The Daily Pennsylvanian as its Executive Editor and managed a staff of 250+ across three publications.
+                                I studied Communications at the University of Pennsylvania&apos;s Annenberg School, with minors in Political Science and Creative Writing. At Penn, I oversaw editorial operations for a 250+ person student media company spanning three publications — The Daily Pennsylvanian, 34th Street Magazine, and Under the Button — and set company-wide content and growth strategies across 6 newsletters, 2 print products, and 10+ departments. I also managed the DP&apos;s first mobile app launch in partnership with engineering and product teams, and built an alumni mentorship program for younger students.
                             </p>
                             <p>
                                 I was trained to find the story, and I&apos;m built to tell yours.
